@@ -11,10 +11,8 @@ import com.example.messenger.api.repositaries.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class MessageServiceImpl(val repository: MessageRepository,
-                         val conversationRepository: ConversationRepository,
-                         val conversationService: ConversationService,
-                         val setRepository: UserRepository) : MessageService {
+class MessageServiceImpl(val repository: MessageRepository, val conversationRepository: ConversationRepository,
+                         val conversationService: ConversationService, val userRepository: UserRepository) : MessageService {
 
     @Throws(MessageEmptyException::class, MessageRecipientInvalidException::class)
     override fun sendMessage(sender: User, recipientId: Long, messageText: String): Message {
