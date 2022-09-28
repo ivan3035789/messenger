@@ -1,5 +1,8 @@
 package com.example.messenger.api.services
 
+import com.example.messenger.api.exceptions.InvalidUserIdException
+import com.example.messenger.api.exceptions.UserStatusEmptyException
+import com.example.messenger.api.exceptions.UsernameUnavailableException
 import com.example.messenger.api.models.User
 import com.example.messenger.api.repositaries.UserRepository
 import org.springframework.stereotype.Service

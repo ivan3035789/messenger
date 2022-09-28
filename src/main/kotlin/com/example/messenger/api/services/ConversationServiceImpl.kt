@@ -1,5 +1,6 @@
 package com.example.messenger.api.services
 
+import com.example.messenger.api.exceptions.ConversationIdInvalidException
 import com.example.messenger.api.models.Conversation
 import com.example.messenger.api.models.User
 import com.example.messenger.api.repositaries.ConversationRepository
@@ -34,7 +35,7 @@ class ConversationServiceImpl(val repository: ConversationRepository) : Conversa
         if (conversation.isPresent) {
             return conversation.get()
         }
-        throw ConversationInvalidException("Invalid conversation id '$conversationId'")
+        throw ConversationIdInvalidException("Invalid conversation id '$conversationId'")
     }
 
     override fun listUserConversation(userId: Long): List<Conversation> {
