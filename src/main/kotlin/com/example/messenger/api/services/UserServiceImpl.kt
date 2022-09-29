@@ -13,14 +13,14 @@ class UserServiceImpl(val repository: UserRepository) : UserService {
 
     @Throws(UsernameUnavailableException::class)
     override fun attemptRegistration(userDetails: User): User {
-        if(!userNameExists(userDetails.userName)) {
+        if(!usernameExists(userDetails.username)) {
             val user = User()
-            user.userName = userDetails.phoneNumber
+            user.username = userDetails.phoneNumber
             user.password = userDetails.password
             repository.save(user)
             return user
         }
-        throw UsernameUnavailableException("The username ${userDetails.userName} is unavailable.")
+        throw UsernameUnavailableException("The username ${userDetails.username} is unavailable.")
     }
 
     @Throws(UserStatusEmptyException::class)

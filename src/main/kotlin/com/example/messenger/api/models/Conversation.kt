@@ -17,8 +17,9 @@ class Conversation(
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = 0,
     @DateTimeFormat
-    var createdAt: Date = Date.from(Instant.now())
+    val createdAt: Date = Date.from(Instant.now())
 ) {
+
     @OneToMany(mappedBy = "conversation", targetEntity = Message::class)
-    private var message: Collection<Message>? = null
+    lateinit var messages: Collection<Message>
 }

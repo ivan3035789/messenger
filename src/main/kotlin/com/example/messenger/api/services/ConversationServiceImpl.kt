@@ -16,17 +16,17 @@ class ConversationServiceImpl(val repository: ConversationRepository) : Conversa
     }
 
     override fun conversationExists(userA: User, userB: User): Boolean {
-        return if (repository.findBySenderIdRAndRecipient(userA.id, userB.id) != null)
+        return if (repository.findBySenderIdAndRecipient(userA.id, userB.id) != null)
             true
-        else repository.findBySenderIdRAndRecipient(userA.id, userB.id) != null
+        else repository.findBySenderIdAndRecipient(userA.id, userB.id) != null
     }
 
     override fun getConversation(userA: User, userB: User): Conversation? {
         return when {
-            repository.findBySenderIdRAndRecipient(userA.id, userB.id) != null ->
-            repository.findBySenderIdRAndRecipient(userA.id, userB.id)
-            repository.findBySenderIdRAndRecipient(userB.id, userA.id) != null ->
-            repository.findBySenderIdRAndRecipient(userB.id, userA.id) else -> null
+            repository.findBySenderIdAndRecipient(userA.id, userB.id) != null ->
+            repository.findBySenderIdAndRecipient(userA.id, userB.id)
+            repository.findBySenderIdAndRecipient(userB.id, userA.id) != null ->
+            repository.findBySenderIdAndRecipient(userB.id, userA.id) else -> null
         }
     }
 
@@ -47,9 +47,9 @@ class ConversationServiceImpl(val repository: ConversationRepository) : Conversa
 
     override fun nameSecondParty(conversation: Conversation, userId: Long): String {
         return if (conversation.sender?.id == userId) {
-            conversation.recipient?.userName as String
+            conversation.recipient?.username as String
         } else {
-            conversation.sender?.userName as String
+            conversation.sender?.username as String
         }
     }
 }

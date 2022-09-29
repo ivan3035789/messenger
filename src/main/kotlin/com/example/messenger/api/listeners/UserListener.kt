@@ -4,7 +4,7 @@ import com.example.messenger.api.models.User
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.persistence.*
 
-class UserListeners {
+class UserListener {
     @PrePersist
     @PreUpdate
     fun hashPassword(user: User) {

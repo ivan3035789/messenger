@@ -20,15 +20,16 @@ class WebSecurityConfig(val userDetailsService: AppUserDetailsService) : WebSecu
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
+            //.antMatchers("/").permitAll()
             .antMatchers(HttpMethod.POST, "/users/registrations").permitAll()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .anyRequest().authenticated()
             .and()
-            .addFilterBefore(
-                JWTLoginFilter("/login", authenticationManager()),
+            // Filter the /login requests
+            .addFilterBefore(JWTLoginFilter("/login", authenticationManager()),
                 UsernamePasswordAuthenticationFilter::class.java)
-            .addFilterBefore(
-                JWTAuthenticationFilter(),
+            // Filter other requests to check the presence of JWT in header
+            .addFilterBefore(JWTAuthenticationFilter(),
                 UsernamePasswordAuthenticationFilter::class.java)
     }
 

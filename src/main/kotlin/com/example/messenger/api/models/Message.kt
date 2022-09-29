@@ -13,13 +13,11 @@ class Message(
     @ManyToOne(optional = false)
     @JoinColumn(name = "recipient_id", referencedColumnName = "id")
     var recipient: User? = null,
-    var body: String = "",
+    var body: String? = "",
     @ManyToOne(optional = false)
-    @JoinColumn(name = "conversation_id", referencedColumnName = "id")
+    @JoinColumn(name="conversation_id", referencedColumnName = "id")
     var conversation: Conversation? = null,
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long = 0,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0,
     @DateTimeFormat
     var createdAt: Date = Date.from(Instant.now())
 )
